@@ -2,14 +2,21 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.0"
-    id("org.gretty") version "3.0.6"
+
+    id("org.springframework.boot") version "2.6.1-SNAPSHOT"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     war
+    kotlin("jvm") version "1.6.0"
+    kotlin("plugin.spring") version "1.6.0"
+    kotlin("plugin.jpa") version "1.6.0"
+
+    id("org.gretty") version "3.0.6"
     id("com.vaadin") version "21.0.7"
 }
 
 val karibudsl_version = "1.1.1"
 val vaadin_version = "21.0.7"
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 defaultTasks("clean", "build")
 
@@ -17,6 +24,10 @@ repositories {
     mavenCentral()
     maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
     maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+
+    maven { url = uri("https://repo.spring.io/milestone") }
+    maven { url = uri("https://repo.spring.io/snapshot") }
+
 }
 
 gretty {
@@ -36,6 +47,25 @@ tasks.withType<Test> {
 val staging by configurations.creating
 
 dependencies {
+
+
+
+    //implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.vaadin:vaadin-spring-boot-starter:21.0.7")
+    //implementation("org.springframework.boot:spring-boot-starter-web")
+
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    runtimeOnly("org.postgresql:postgresql")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
+
     // Karibu-DSL dependency
     implementation("com.github.mvysny.karibudsl:karibu-dsl:$karibudsl_version")
     implementation("com.github.mvysny.karibu-tools:karibu-tools:0.7")
@@ -46,7 +76,7 @@ dependencies {
 
     // logging
     // currently we are logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties file for the logger configuration
-    implementation("org.slf4j:slf4j-simple:1.7.32")
+   // implementation("org.slf4j:slf4j-simple:1.7.32")
 
     implementation(kotlin("stdlib-jdk8"))
 
@@ -55,11 +85,15 @@ dependencies {
     testImplementation("com.github.mvysny.dynatest:dynatest:0.22")
 
     // heroku app runner
-    staging("com.heroku:webapp-runner-main:9.0.52.0")
+    //staging("com.heroku:webapp-runner-main:9.0.52.0")
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions{
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "11"
+    }
+
 }
 
 java {
