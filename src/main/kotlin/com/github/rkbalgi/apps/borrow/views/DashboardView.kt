@@ -1,4 +1,4 @@
-package com.github.rkbalgi.apps.borrow
+package com.github.rkbalgi.apps.borrow.views
 
 import com.github.mvysny.karibudsl.v10.*
 import com.github.mvysny.kaributools.tooltip
@@ -7,24 +7,28 @@ import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.button.ButtonVariant
 import com.vaadin.flow.component.dialog.Dialog
 import com.vaadin.flow.component.formlayout.FormLayout
-import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.orderedlayout.FlexComponent
-import com.vaadin.flow.component.page.AppShellConfigurator
+import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
-import com.vaadin.flow.router.Route
-import com.vaadin.flow.server.PWA
 
-/**
- * The main view contains a button and a click listener.
- */
-@Route("")
-class MainView : KComposite() {
+import com.vaadin.flow.router.PageTitle
+import com.vaadin.flow.router.Route
+
+import javax.annotation.security.PermitAll
+
+
+@PermitAll
+@Route(value = "dashboard", layout = MainLayout::class)
+@PageTitle("Dashboard | BorrowApp")
+class DashboardView : VerticalLayout() {
+
+
     private lateinit var nameField: TextField
     private lateinit var addAssetButton: Button
     private lateinit var addAssetDialog: Dialog
 
     // The main view UI definition
-    private val root = ui {
+    init {
 
 
         //appLayout {
@@ -103,9 +107,6 @@ class MainView : KComposite() {
         //}
 
 
-    }
-
-    init {
         // attach functionality to the UI components.
         // It's a good practice to keep UI functionality separated from UI definition.
 
@@ -116,5 +117,3 @@ class MainView : KComposite() {
     }
 }
 
-@PWA(name = "Project Base for Vaadin", shortName = "Project Base")
-class AppShell : AppShellConfigurator

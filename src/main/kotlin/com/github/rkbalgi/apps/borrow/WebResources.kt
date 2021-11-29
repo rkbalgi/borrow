@@ -12,8 +12,7 @@ class WebResources {
 
 
     @GetMapping("/ok")
-
-    public fun ok(): String {
+    fun ok(): String {
         return "200 OK";
     }
 }

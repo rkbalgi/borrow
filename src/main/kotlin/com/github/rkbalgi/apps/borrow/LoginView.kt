@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route
 
 @Route("login")
 @PageTitle("Login | BorrowApp")
-public class LoginView : VerticalLayout(), BeforeEnterObserver {
+class LoginView : VerticalLayout(), BeforeEnterObserver {
 
 
     private val login = LoginForm()
@@ -29,6 +29,7 @@ public class LoginView : VerticalLayout(), BeforeEnterObserver {
 
 
     override fun beforeEnter(p0: BeforeEnterEvent?) {
+
         if (p0?.location?.queryParameters?.parameters?.containsKey("error")!!) {
             login.setError(true)
         }
