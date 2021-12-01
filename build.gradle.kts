@@ -49,13 +49,13 @@ val staging by configurations.creating
 dependencies {
 
 
-
-    //implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.bouncycastle:bcprov-jdk15on:1.69")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.vaadin:vaadin-spring-boot-starter:21.0.7")
     //implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
 
-
+    runtimeOnly("org.postgresql:postgresql")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
