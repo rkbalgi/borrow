@@ -13,10 +13,10 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication(exclude = [ErrorMvcAutoConfiguration::class])
-@PWA(name = "My Fun Application", shortName = "fun-app")
+@PWA(name = "Borrow App", shortName = "borrow-app")
 @Viewport("width=device-width, initial-scale=1")
 @BodySize(height = "100vh", width = "100vw")
-@PageTitle("my-title")
+@PageTitle("Borrow! - Share books and other things within your community!")
 @Theme(themeClass = Material::class, variant = Material.LIGHT)
 class BorrowApp : SpringBootServletInitializer(), AppShellConfigurator
 
