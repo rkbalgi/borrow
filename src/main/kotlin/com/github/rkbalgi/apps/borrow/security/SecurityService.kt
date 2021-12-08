@@ -16,11 +16,6 @@ class SecurityService(@Autowired private val userRepo: UserRepo) {
 
     fun getAuthenticatedUser(): UserDetails? {
 
-        userRepo.findByUserName("rbalgi").apply {
-            if (this != null) {
-                println(this.password)
-            }
-        }
 
         val context = SecurityContextHolder.getContext()
         val principal = context.authentication?.principal

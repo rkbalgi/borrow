@@ -52,7 +52,8 @@ dependencies {
     implementation("org.bouncycastle:bcprov-jdk15on:1.69")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.vaadin:vaadin-spring-boot-starter:21.0.7")
-    //implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.vaadin:vaadin-material-theme")
+    //implementation("org.junit.jupiter:junit-jupiter:5.8.2")
     implementation("org.springframework.boot:spring-boot-starter-security")
 
     runtimeOnly("org.postgresql:postgresql")
