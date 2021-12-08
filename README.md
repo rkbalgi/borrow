@@ -1,7 +1,7 @@
 [![Gradle Build](https://github.com/rkbalgi/borrow/actions/workflows/gradle.yml/badge.svg)](https://github.com/rkbalgi/borrow/actions/workflows/gradle.yml)
 
 # Borrow 
-## An app to share your books and other things with your friends in your community
+## An app to share your books and other things with friends in your community
 
 This app is built using [vaadin](https://vaadin.com/blog/meet-vaadin-21) and [kotlin](https://kotlinlang.org/) using the [karibu](https://github.com/mvysny/karibu10-helloworld-application) DSL
 
@@ -73,7 +73,7 @@ Use the following `Dockerfile` to both build the app, and to create a final prod
 ```dockerfile
 # Build stage
 FROM openjdk:11 AS BUILD
-RUN git clone https://github.com/mvysny/karibu10-helloworld-application /app
+RUN git clone https://github.com/rkbalgi/borrow /app
 WORKDIR app
 RUN ./gradlew -Pvaadin.productionMode
 
@@ -84,12 +84,12 @@ COPY --from=BUILD /app/build/libs/app.war /usr/local/tomcat/webapps/ROOT.war
 
 To build the docker image:
 ```bash
-docker build -t mvy/karibu10:latest .
+docker build -t rkbalgi/borrow:latest .
 ```
 
 To run the app:
 ```bash
-docker run --rm -ti -p 8080:8080 mvy/karibu10
+docker run --rm -ti -p 8080:8080 rkbalgi/borrow:latest
 ```
 
 Now open [http://localhost:8080/](http://localhost:8080/).
