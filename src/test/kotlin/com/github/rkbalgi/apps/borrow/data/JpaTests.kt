@@ -10,16 +10,16 @@ import org.springframework.test.context.TestPropertySource
 
 //@SpringBootTest
 //@TestPropertySource(locations = ["classpath:application-test.properties"])
-class JpaTests(@Autowired val assetRepo: AssetRepo) {
-
-
-    @Test
-    @Disabled
-    fun test_assets() {
-        val assets = mutableListOf<Asset>()
-        assetRepo.findAll().toCollection(assets)
-        println(assets.size)
-        assertTrue(assets.size > 0)
-
-    }
-}
+//class JpaTests(@Autowired val assetRepo: AssetRepo) {
+//
+//
+//    @Test
+//    @Disabled
+//    fun test_assets() {
+//        val assets = mutableListOf<Asset>()
+//        assetRepo.findAll().toCollection(assets)
+//        println(assets.size)
+//        assertTrue(assets.size > 0)
+//
+//    }
+//}
