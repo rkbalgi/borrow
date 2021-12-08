@@ -1,3 +1,5 @@
+[![Gradle Build](https://github.com/rkbalgi/borrow/actions/workflows/gradle.yml/badge.svg)](https://github.com/rkbalgi/borrow/actions/workflows/gradle.yml)
+
 # Borrow 
 ## An app to share your books and other things with your friends in your community
 
