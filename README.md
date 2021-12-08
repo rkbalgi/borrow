@@ -1,5 +1,3 @@
-[![Powered By Vaadin on Kotlin](http://vaadinonkotlin.eu/iconography/vok_badge.svg)](http://vaadinonkotlin.eu)
-
 # Borrow 
 ## An app to share your books and other things with your friends in your community
 
