@@ -10,7 +10,7 @@ import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
 
 @Route("login")
-@PageTitle("Login | BorrowApp")
+@PageTitle("Login | BorrowApp1.kt")
 class LoginView : VerticalLayout(), BeforeEnterObserver {
 
 
@@ -24,7 +24,7 @@ class LoginView : VerticalLayout(), BeforeEnterObserver {
         login.action = "login"
 
 
-        add(h1("BorrowApp - "+System.getenv().getOrDefault("borrow-app.install-name","Unspecified")), login)
+        add(h1("BorrowApp1.kt - "+System.getenv().getOrDefault("borrow-app.install-name","Unspecified")), login)
     }
 
 

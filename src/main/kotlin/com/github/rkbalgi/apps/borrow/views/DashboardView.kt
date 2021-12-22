@@ -72,10 +72,13 @@ class AssetBackendDataProvider(private val assetRepo: AssetRepo) : AbstractDataP
 
 @Component
 @PermitAll
-@Route(value = "dashboard", layout = MainLayout::class)
-@PageTitle("Dashboard | BorrowApp")
+@Route(value = "", layout = MainLayout::class)
+@PageTitle("Dashboard | BorrowApp1.kt")
 @PreserveOnRefresh
-class DashboardView(@Autowired val assetRepo: AssetRepo, @Autowired val userRepo: UserRepo) : VerticalLayout() {
+class DashboardView(
+    @Autowired val assetRepo: AssetRepo,
+    @Autowired val userRepo: UserRepo
+) : VerticalLayout() {
 
     private lateinit var dataProvider: ListDataProvider<Asset>
 
@@ -84,11 +87,15 @@ class DashboardView(@Autowired val assetRepo: AssetRepo, @Autowired val userRepo
     private lateinit var refreshDataButton: Button
     private lateinit var addAssetButton: Button
     private lateinit var addAssetDialog: Dialog
+    private lateinit var searchButton: Button
 
     val title = TextField()
     val authors = TextField()
     val comments = TextField()
     val tags = TextField()
+
+
+    val filterText = TextField()
 
     // The main view UI definition
     init {
@@ -104,12 +111,22 @@ class DashboardView(@Autowired val assetRepo: AssetRepo, @Autowired val userRepo
                 refreshDataButton = button("", VaadinIcon.REFRESH.create()) {}
 
             }
+
+
+            horizontalLayout {
+                add(filterText)
+                searchButton = button("", VaadinIcon.SEARCH.create()) {}
+            }
+
             // Use Button for a clickable button
             assetRepo.findAll().toCollection(allAssets);
             dataProvider = DataProvider.ofCollection(allAssets)
 
             assetGrid = grid(Asset::class, dataProvider) {
                 width = "80%"
+                //height="100%"
+
+
                 columnFor<Asset, String>(Asset::name) {
                     setHeader("Name")
                 }
@@ -220,9 +237,28 @@ class DashboardView(@Autowired val assetRepo: AssetRepo, @Autowired val userRepo
         }
 
         refreshDataButton.addClickListener {
+
+            filterText.value = ""
+
             allAssets.clear()
             assetRepo.findAll().toCollection(allAssets)
             assetGrid.refresh()
+        }
+
+        searchButton.addClickListener {
+
+            if (filterText.value.isNotBlank()) {
+
+                val filtered = allAssets.filter {
+                    !it.name.lowercase().contains(filterText.value.lowercase());
+                }
+                allAssets.removeAll(filtered)
+            } else {
+                allAssets.clear()
+                assetRepo.findAll().toCollection(allAssets)
+            }
+            assetGrid.refresh()
+
         }
 
     }

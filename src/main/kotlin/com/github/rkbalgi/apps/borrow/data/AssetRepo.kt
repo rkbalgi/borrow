@@ -10,4 +10,6 @@ interface AssetRepo : CrudRepository<Asset, UUID> {
     override fun findById(id: UUID): Optional<Asset>
     override fun <S: Asset?> save(asset: S):S
 
+
+
 }

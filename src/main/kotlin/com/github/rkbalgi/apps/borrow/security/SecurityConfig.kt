@@ -89,7 +89,7 @@ class CustomAuthProvider(@Autowired private val userRepo: UserRepo) : Authentica
                 if (this != null) {
 
                     println("Comparing ${sha256(passwd!!).lowercase()} with ${this.password}")
-                    if (sha256(passwd!!).lowercase() == this.password) {
+                    if (sha256(passwd).lowercase() == this.password) {
 
                         //successful authentication
                         this.lastLoginTS = Timestamp(System.currentTimeMillis())

@@ -14,6 +14,8 @@ plugins {
     id("com.vaadin") version "21.0.7"
 }
 
+apply(plugin = "io.spring.dependency-management")
+
 val karibudsl_version = "1.1.1"
 val vaadin_version = "21.0.7"
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -30,11 +32,11 @@ repositories {
 
 }
 
-gretty {
-    contextPath = "/"
-    servletContainer = "jetty9.4"
-    // managedClassReload = true // temporarily disabled because of https://github.com/gretty-gradle-plugin/gretty/issues/166
-}
+//gretty {
+//    contextPath = "/"
+//    servletContainer = "jetty9.4"
+//    // managedClassReload = true // temporarily disabled because of https://github.com/gretty-gradle-plugin/gretty/issues/166
+//}
 
 tasks.withType<Test> {
     useJUnitPlatform()
@@ -50,24 +52,23 @@ dependencies {
 
 
     implementation("org.bouncycastle:bcprov-jdk15on:1.69")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+
     implementation("com.vaadin:vaadin-spring-boot-starter:21.0.7")
     implementation("com.vaadin:vaadin-material-theme")
-    //implementation("org.junit.jupiter:junit-jupiter:5.8.2")
+
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 
     runtimeOnly("org.postgresql:postgresql")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("org.postgresql:postgresql")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-
 
     // Karibu-DSL dependency
     implementation("com.github.mvysny.karibudsl:karibu-dsl:$karibudsl_version")
@@ -77,9 +78,6 @@ dependencies {
     implementation("com.vaadin:vaadin-core:${vaadin_version}")
     providedCompile("javax.servlet:javax.servlet-api:3.1.0")
 
-    // logging
-    // currently we are logging through the SLF4J API to SLF4J-Simple. See src/main/resources/simplelogger.properties file for the logger configuration
-   // implementation("org.slf4j:slf4j-simple:1.7.32")
 
     implementation(kotlin("stdlib-jdk8"))
 
@@ -88,8 +86,13 @@ dependencies {
     testImplementation("com.github.mvysny.dynatest:dynatest:0.22")
 
     // heroku app runner
-    //staging("com.heroku:webapp-runner-main:9.0.52.0")
+    staging("com.heroku:webapp-runner-main:9.0.52.0")
 }
+
+springBoot {
+    mainClass.set("com.github.rkbalgi.apps.borrow.BorrowAppKt")
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions{

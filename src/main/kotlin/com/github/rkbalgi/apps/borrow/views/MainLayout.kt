@@ -31,7 +31,7 @@ class MainLayout() : AppLayout() {
 
 
     private fun createHeader() {
-        val logo = H3("BorrowApp")
+        val logo = H3("BorrowApp1.kt")
         logo.addClassNames("text-l", "m-m")
         val logout = Button("Log out") { _ -> logout() }
 
@@ -53,13 +53,12 @@ class MainLayout() : AppLayout() {
 
     private fun createDrawer() {
 
-        val listLink = RouterLink("My Assets", DefaultView::class.java)
+        val listLink = RouterLink("Dashboard", DashboardView::class.java)
         listLink.highlightCondition = HighlightConditions.sameLocation()
 
         addToDrawer(
             VerticalLayout(
                 listLink,
-                RouterLink("Dashboard", DashboardView::class.java)
             )
         )
     }

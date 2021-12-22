@@ -7,6 +7,7 @@ import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.server.PWA
 import com.vaadin.flow.theme.Theme
 import com.vaadin.flow.theme.material.Material
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
 import org.springframework.boot.runApplication
@@ -18,8 +19,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @BodySize(height = "100vh", width = "100vw")
 @PageTitle("Borrow! - Share books and other things within your community!")
 @Theme(themeClass = Material::class, variant = Material.LIGHT)
-class BorrowApp : SpringBootServletInitializer(), AppShellConfigurator
+class BorrowApp() : SpringBootServletInitializer(), AppShellConfigurator
 
 fun main(args: Array<String>) {
-    runApplication<BorrowApp>(*args)
+    println("Environment ${System.getenv()}")
+    SpringApplication.run(BorrowApp::class.java, *args)
+    //runApplication<>(*args)
 }
